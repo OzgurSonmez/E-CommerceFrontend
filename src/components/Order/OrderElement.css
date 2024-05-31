@@ -1,0 +1,121 @@
+.order-element {
+  width: 50%;
+  margin-top: 20px;
+
+  padding: 16px 8px 16px 16px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-element-content {
+  width: 100%;
+}
+
+/* Header */
+.order-element-header {
+  color: #bc79ff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Body  */
+
+.order-element-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.order-element-body div {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-element-order-date {
+  width: 34%;
+}
+
+.order-element-order-status {
+  width: 30%;
+}
+
+.order-element-total-price {
+  width: 18%;
+}
+
+.order-element-body span:nth-child(odd) {
+  color: #828282;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.order-element-body span:nth-child(even) {
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+}
+
+.order-element-delivery-adress {
+  margin-top: 10px;
+}
+
+.order-element-delivery-adress div:nth-child(odd) {
+  color: #828282;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.order-element-delivery-adress-detail {
+  display: flex;
+  flex-direction: column;
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+}
+
+.order-element-products-title {
+  margin-top: 20px;
+  color: #828282;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.order-element-product-element-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+}
+
+.order-element-product-element-title-brand {
+  color: #828282;
+  width: 15%;
+}
+
+.order-element-product-element-title-product-name {
+  color: #828282;
+  width: 65%;
+}
+
+.order-element-product-element-title-quantity {
+  color: #828282;
+  width: 10%;
+}
+
+.order-element-product-element-title-unit-price {
+  color: #828282;
+  width: 10%;
+}

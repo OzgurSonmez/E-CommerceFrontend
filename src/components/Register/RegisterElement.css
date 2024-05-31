@@ -1,0 +1,47 @@
+.register-element {
+  width: 400px;
+  max-width: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 16px 8px 16px 16px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
+}
+
+.register-element h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.register-element label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.register-element input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.register-element button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-element button:hover {
+  background-color: #45a049;
+}

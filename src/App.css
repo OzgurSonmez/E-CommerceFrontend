@@ -1,10 +1,14 @@
-.App {
+.app-container {
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.body-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (prefers-reduced-motion: no-preference) {

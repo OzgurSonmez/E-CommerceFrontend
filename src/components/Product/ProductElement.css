@@ -1,0 +1,21 @@
+.product-element {
+  width: 250px !important;
+  height: 400px !important;
+  margin: 20px 8px 10px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.058) 0px 3px 20px,
+    rgba(0, 0, 0, 0.231) 0px 0px 25px;
+  background-color: #fdfdfd;
+  padding: 2px;
+  transition: all 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-element:hover {
+  transform: scale(1.025);
+  border-radius: 23px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
