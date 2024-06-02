@@ -1,0 +1,39 @@
+.purchase-element-delivery-adress-detail {
+  padding: 16px 8px 16px 16px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-right: 20px;
+}
+
+.delivery-adress-detail-content {
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-adress-detail-content span {
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.delivery-adress-radio-button {
+  display: flex;
+  align-items: center;
+}
+
+.purchase-element-delivery-adress-detail-radio {
+  display: block;
+  width: 20px;
+  height: 20px;
+}

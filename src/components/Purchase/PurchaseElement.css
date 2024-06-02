@@ -1,0 +1,119 @@
+.purchase-element {
+  width: 50%;
+  margin-top: 20px;
+
+  padding: 16px 8px 16px 16px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.purchase-element-content {
+  width: 100%;
+}
+
+/* Header */
+.purchase-element-header {
+  color: #bc79ff;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.purchase-element-order-date {
+  width: 34%;
+}
+
+.purchase-element-order-status {
+  width: 30%;
+}
+
+.purchase-element-total-price {
+  width: 18%;
+}
+
+.purchase-element-delivery-adress {
+  margin-top: 10px;
+}
+
+.purchase-element-delivery-adress-title {
+  color: #828282;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Products */
+
+.purchase-element-products-title {
+  margin-top: 20px;
+  color: #828282;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.purchase-element-product-element-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+}
+
+.purchase-element-product-element-title-brand {
+  color: #828282;
+  width: 15%;
+}
+
+.purchase-element-product-element-title-product-name {
+  color: #828282;
+  width: 65%;
+}
+
+.purchase-element-product-element-title-quantity {
+  color: #828282;
+  width: 10%;
+}
+
+.purchase-element-product-element-title-unit-price {
+  color: #828282;
+  width: 10%;
+}
+
+/*  */
+.purchase-element-total-price {
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.purchase-element-total-price span:nth-child(odd) {
+  color: #828282;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.purchase-element-total-price span:nth-child(even) {
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+}
+
+.purchase-element-complete-order {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.purchase-element-complete-order button {
+  margin-top: 20px;
+  margin-right: 20px;
+}

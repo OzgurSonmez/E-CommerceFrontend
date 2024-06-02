@@ -16,7 +16,7 @@
 }
 
 .basket-element-product-element-product-name {
-  width: 45%;
+  width: 40%;
 }
 
 .basket-element-product-element-quantity {
@@ -25,6 +25,17 @@
 
 .basket-element-product-element-unit-price {
   width: 10%;
+}
+
+.basket-element-product-element-is-selected {
+  display: flex;
+  align-items: center;
+  width: 5%;
+}
+
+.basket-element-product-element-checkbox {
+  width: 40%;
+  height: 40%;
 }
 
 .basket-element-product-element-button {

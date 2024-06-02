@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./BasketProductElement.css";
 
 type Props = {};
 
 const BasketProductElement = (props: Props) => {
+  // Checkbox durumunu yönetmek için useState kullanıyoruz
+  const [isChecked, setIsChecked] = useState(true);
+
+  // Checkbox'ın durumunu değiştiren fonksiyon
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div className="basket-element-product-element">
       <div className="basket-element-product-element-brand">Samsung</div>
@@ -22,6 +30,14 @@ const BasketProductElement = (props: Props) => {
         <button type="button" className="btn btn-danger">
           Sil
         </button>
+      </div>
+      <div className="basket-element-product-element-is-selected">
+        <input
+          type="checkbox"
+          className="basket-element-product-element-checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
       </div>
     </div>
   );
