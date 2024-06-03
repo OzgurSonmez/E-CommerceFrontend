@@ -3,6 +3,7 @@ import { BASE_API_URL } from "../environment/environment";
 import axiosInstance from "../interceptor/axiosInterceptor";
 import { RegisterDto } from "../models/Auth/registerRequestBody";
 import { LoginDto } from "../models/Auth/loginRequestBody";
+import { ChangePasswordDto } from "../models/Auth/changePasswordBody";
 
 class authManagementService {
   public apiUrl: string;
@@ -17,6 +18,15 @@ class authManagementService {
 
   login(requestBody: LoginDto): Promise<AxiosResponse<LoginDto, any>> {
     return axiosInstance.post<any>(this.apiUrl + "/login", requestBody);
+  }
+
+  changePassword(
+    requestBody: ChangePasswordDto
+  ): Promise<AxiosResponse<ChangePasswordDto, any>> {
+    return axiosInstance.post<any>(
+      this.apiUrl + "/changePassword",
+      requestBody
+    );
   }
 }
 
