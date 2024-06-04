@@ -12,6 +12,7 @@ import { basketProductReducer } from "./basketProduct/basketProductSlice";
 import { basketReducer } from "./basket/basketSlice";
 import { customerOrderReducer } from "./customerOrder/customerOrderSlice";
 import { customerOrderDetailReducer } from "./customerOrderDetail/customerOrderDetailSlice";
+import { customerProductFavoriteReducer } from "./customerProductFavorite/customerProductFavoriteSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   deliveryAddress: deliveryAddressReducer,
   customerOrder: customerOrderReducer,
   customerOrderDetail: customerOrderDetailReducer,
+  customerProductFavorite: customerProductFavoriteReducer,
 });
 
 const persistConfig = {

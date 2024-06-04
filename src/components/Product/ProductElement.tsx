@@ -4,6 +4,7 @@ import { AddProductToBasketRequest } from "../../models/BasketProduct/addProduct
 import basketProductService from "../../services/basketProductService";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
+import customerProductFavoriteService from "../../services/customerProductFavoriteService";
 
 type Props = {
   productId: number;
@@ -34,6 +35,23 @@ const ProductElement = (props: Props) => {
     }
   };
 
+  const customerId: number | null = useSelector(
+    (state: RootState) => state.customer.customerId
+  );
+
+  const addProductToFavorite = async () => {
+    if (customerId && props.productId) {
+      try {
+        await customerProductFavoriteService.addProductToFavorite(
+          customerId,
+          props.productId
+        );
+      } catch (error) {
+        console.error("Ürünü favoriden silme hatası:", error);
+      }
+    }
+  };
+
   return (
     <div className="product-element card">
       <div className="card-body">
@@ -53,6 +71,13 @@ const ProductElement = (props: Props) => {
           onClick={addProductToBasket}
         >
           Sepete Ekle
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={addProductToFavorite}
+        >
+          Favoriye Ekle
         </button>
       </div>
     </div>

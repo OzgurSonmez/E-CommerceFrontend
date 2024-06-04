@@ -29,6 +29,9 @@ const Navbar = (props: Props) => {
               <li className="nav-item">
                 <Link to="/basket"> Sepet </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/productFavorite"> Favori Ürünler </Link>
+              </li>
             </ul>
           </div>
         </div>
