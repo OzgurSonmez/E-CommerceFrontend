@@ -19,13 +19,41 @@ class basketProductService {
     );
   }
 
-  // /addProductToBasket?BasketId=11111&ProductId=2&ProductQuantity=3&IsSelected=4
   addProductToBasket(
     requestBody: AddProductToBasketRequest
   ): Promise<AxiosResponse<AddProductToBasketRequest, any>> {
     return axiosInstance.post<any>(
       this.apiUrl +
         "/addProductToBasket?BasketId=" +
+        requestBody.basketId +
+        "&ProductId=" +
+        requestBody.productId +
+        "&ProductQuantity=" +
+        requestBody.productQuantity +
+        "&IsSelected=" +
+        requestBody.isSelected
+    );
+  }
+
+  deleteProductToBasket(
+    basketId: number,
+    productId: number
+  ): Promise<AxiosResponse<any, any>> {
+    return axiosInstance.post<any>(
+      this.apiUrl +
+        "/deleteProductToBasket?basketId=" +
+        basketId +
+        "&ProductId=" +
+        productId
+    );
+  }
+
+  decreaseProductToBasket(
+    requestBody: AddProductToBasketRequest
+  ): Promise<AxiosResponse<AddProductToBasketRequest, any>> {
+    return axiosInstance.post<any>(
+      this.apiUrl +
+        "/decreaseProductToBasket?BasketId=" +
         requestBody.basketId +
         "&ProductId=" +
         requestBody.productId +
