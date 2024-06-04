@@ -1,21 +1,22 @@
 import axios, { AxiosResponse } from "axios";
 import { BASE_API_URL } from "../environment/environment";
 import axiosInstance from "../interceptor/axiosInterceptor";
+import { getListBrandDto } from "../models/Brand/getListBrandDto";
 
-class emailService {
+class customerService {
   public apiUrl: string;
 
   constructor() {
-    this.apiUrl = BASE_API_URL + "Emails";
+    this.apiUrl = BASE_API_URL + "Customers";
   }
 
-  async getEmailIdByEmailAddress(
-    emailAddress: string
+  async getCustomerIdByEmailId(
+    emailId: number
   ): Promise<AxiosResponse<any, number>> {
     return axiosInstance.get<any>(
-      this.apiUrl + "/getEmailIdByEmailAddress?emailAddress=" + emailAddress
+      this.apiUrl + "/getCustomerIdByEmailId?emailId=" + emailId
     );
   }
 }
 
-export default new emailService();
+export default new customerService();

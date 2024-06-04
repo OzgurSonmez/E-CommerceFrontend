@@ -4,6 +4,10 @@ import { LoginDto } from "../../models/Auth/loginRequestBody";
 import authManagementService from "../../services/authManagementService";
 import { Field, Form, Formik } from "formik";
 import emailService from "../../services/emailService";
+import customerService from "../../services/customerService";
+import { useDispatch } from "react-redux";
+import { setEmailId } from "../../store/email/emailSlice";
+import { setCustomerId } from "../../store/customer/customerSlice";
 
 type Props = {};
 
@@ -13,21 +17,32 @@ const LoginElement = (props: Props) => {
     password: "",
   };
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values: LoginDto) => {
     try {
       await authManagementService.login(values);
-      console.log("Giriş başarılı!");
+      console.log("Giriş denemesi başarılı!");
       try {
         const emailResponse = await emailService.getEmailIdByEmailAddress(
           values.emailAddress
         );
-        const data = emailResponse.data;
-        console.log(data.emailId);
+        const emailData = emailResponse.data;
+        dispatch(setEmailId(emailData.emailId));
+        try {
+          const customerResponse = await customerService.getCustomerIdByEmailId(
+            emailData.emailId
+          );
+          const customerData = customerResponse.data;
+          dispatch(setCustomerId(customerData.customerId));
+        } catch (error) {
+          console.error("CustomerId hatası:", error);
+        }
       } catch (error) {
         console.error("EmailId hatası:", error);
       }
     } catch (error) {
-      console.error("Giriş hatası:", error);
+      console.error("Giriş denemesi hatası:", error);
     }
   };
 
