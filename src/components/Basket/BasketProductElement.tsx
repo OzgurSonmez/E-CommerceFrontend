@@ -107,21 +107,21 @@ const BasketProductElement = (props: Props) => {
           className="btn btn-warning"
           onClick={decreaseProductToBasket}
         >
-          -
+          <i className="bi bi-dash-lg"></i>
         </button>
         <button
           type="button"
           className="btn btn-success"
           onClick={addProductToBasket}
         >
-          +
+          <i className="bi bi-plus-lg"></i>
         </button>
         <button
           type="button"
           className="btn btn-danger"
           onClick={deleteProductToBasket}
         >
-          Sil
+          <i className="bi bi-trash3-fill"></i>
         </button>
       </div>
       <div className="basket-element-product-element-is-selected">

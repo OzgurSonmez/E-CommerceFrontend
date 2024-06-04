@@ -45,7 +45,7 @@ const CustomerProductFavoriteElement = (props: Props) => {
           className="btn btn-danger"
           onClick={deleteProductToFavorite}
         >
-          Sil
+          <i className="bi bi-trash3-fill"></i>
         </button>
       </div>
     </div>

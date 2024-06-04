@@ -54,30 +54,47 @@ const ProductElement = (props: Props) => {
 
   return (
     <div className="product-element card">
-      <div className="card-body">
+      <div className="product-element-header card-body">
         <h5 className="card-title">{props.brandName}</h5>
         <p className="card-text">{props.productName}</p>
       </div>
-      <ul className="list-group list-group-flush">
-        <li className="list-group-item">{props.categoryName}</li>
-        <li className="list-group-item">{props.favoriteCount}</li>
-        <li className="list-group-item">{"%" + props.discount + " indirim"}</li>
-        <li className="list-group-item">{props.price + " ₺"}</li>
-      </ul>
-      <div className="card-body">
+      <div className="product-element-body">
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            <i className="bi bi-tag-fill" style={{ color: "darkblue" }}></i>
+            {" " + props.categoryName}
+          </li>
+          <li className="list-group-item">
+            <i
+              className="bi bi-heart-fill favorite-icon"
+              style={{ color: "tomato" }}
+            ></i>
+            {" " + props.favoriteCount}
+          </li>
+          <li className="list-group-item">
+            <i className="bi bi-arrow-down" style={{ color: "green" }}></i>
+            {" %" + props.discount + " İndirim"}
+          </li>
+          <li className="list-group-item product-element-price">
+            <i className="bi bi-cash" style={{ color: "goldenrod" }}></i>
+            {" " + props.price + " ₺"}
+          </li>
+        </ul>
+      </div>
+      <div className="product-element-buttons card-body">
         <button
           type="button"
-          className="btn btn-primary"
-          onClick={addProductToBasket}
+          className="btn btn-danger"
+          onClick={addProductToFavorite}
         >
-          Sepete Ekle
+          <i className="bi bi-heart-fill"></i>
         </button>
         <button
           type="button"
-          className="btn btn-primary"
-          onClick={addProductToFavorite}
+          className="btn btn-success"
+          onClick={addProductToBasket}
         >
-          Favoriye Ekle
+          <i className="bi bi-cart-plus-fill"></i>
         </button>
       </div>
     </div>
