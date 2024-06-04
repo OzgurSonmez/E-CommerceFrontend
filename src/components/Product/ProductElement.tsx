@@ -1,5 +1,9 @@
 import React from "react";
 import "./ProductElement.css";
+import { AddProductToBasketRequest } from "../../models/BasketProduct/addProductToBasketRequest";
+import basketProductService from "../../services/basketProductService";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/configureStore";
 
 type Props = {
   productId: number;
@@ -12,6 +16,24 @@ type Props = {
 };
 
 const ProductElement = (props: Props) => {
+  const basketId: number | null = useSelector(
+    (state: RootState) => state.basket.basketId
+  );
+
+  const addProductToBasket = async () => {
+    try {
+      const request: AddProductToBasketRequest = {
+        basketId: basketId,
+        productId: props.productId,
+        productQuantity: 1,
+        isSelected: 1,
+      };
+      await basketProductService.addProductToBasket(request);
+    } catch (error) {
+      console.error("Ürünü sepete ekleme hatası:", error);
+    }
+  };
+
   return (
     <div className="product-element card">
       <div className="card-body">
@@ -25,9 +47,13 @@ const ProductElement = (props: Props) => {
         <li className="list-group-item">{props.price + " ₺"}</li>
       </ul>
       <div className="card-body">
-        <a href="#" className="btn btn-primary">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={addProductToBasket}
+        >
           Sepete Ekle
-        </a>
+        </button>
       </div>
     </div>
   );

@@ -19,11 +19,15 @@ const BasketElement = (props: Props) => {
 
   const dispatch = useDispatch();
 
+  const customerId: number | null = useSelector(
+    (state: RootState) => state.customer.customerId
+  );
+
   // BasketProducts -----------------------------
-  async function fetchBasketProductsData() {
+  async function fetchBasketProductsData(customerId: number) {
     try {
       const basketProductsResponse =
-        await basketProductService.getBasketProductByCustomerId(144);
+        await basketProductService.getBasketProductByCustomerId(customerId);
       const data = basketProductsResponse.data;
       dispatch(setBasketProducts(data));
     } catch (error) {
@@ -32,8 +36,10 @@ const BasketElement = (props: Props) => {
   }
 
   useEffect(() => {
-    fetchBasketProductsData();
-  }, []);
+    if (customerId) {
+      fetchBasketProductsData(customerId);
+    }
+  }, [customerId]);
 
   const getListBasketProductDto: getListBasketProductDto[] = useSelector(
     (state: RootState) => state.basketProduct.basketProducts
