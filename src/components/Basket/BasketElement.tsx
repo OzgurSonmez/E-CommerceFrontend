@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./BasketElement.css";
 import BasketProductElement from "./BasketProductElement";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import basketProductService from "../../services/basketProductService";
+import { setBasketProducts } from "../../store/basketProduct/basketProductSlice";
+import { RootState } from "../../store/configureStore";
+import { getListBasketProductDto } from "../../models/BasketProduct/getListBasketProductDto";
 
 type Props = {};
 
@@ -11,6 +16,30 @@ const BasketElement = (props: Props) => {
   const handleButtonClick = () => {
     navigate("/purchase");
   };
+
+  const dispatch = useDispatch();
+
+  // BasketProducts -----------------------------
+  async function fetchBasketProductsData() {
+    try {
+      const basketProductsResponse =
+        await basketProductService.getBasketProductByCustomerId(144);
+      const data = basketProductsResponse.data;
+      dispatch(setBasketProducts(data));
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchBasketProductsData();
+  }, []);
+
+  const getListBasketProductDto: getListBasketProductDto[] = useSelector(
+    (state: RootState) => state.basketProduct.basketProducts
+  );
+
+  console.log(getListBasketProductDto);
   return (
     <div className="basket-element">
       <div className="basket-element-content">
@@ -40,11 +69,19 @@ const BasketElement = (props: Props) => {
               &nbsp;
             </span>
           </div>
-          <BasketProductElement />
-          <BasketProductElement />
-          <BasketProductElement />
-          <BasketProductElement />
-          <BasketProductElement />
+          {getListBasketProductDto &&
+            getListBasketProductDto.length > 0 &&
+            getListBasketProductDto.map((value, index) => (
+              <BasketProductElement
+                key={index}
+                brandName={value.brandName}
+                productId={value.productId}
+                Name={value.productName}
+                Quantity={value.productQuantity}
+                Price={value.productPrice}
+                isSelected={value.productIsSelected}
+              />
+            ))}
         </div>
 
         <div className="basket-element-complete-order">

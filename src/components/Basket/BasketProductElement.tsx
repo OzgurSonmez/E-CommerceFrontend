@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import "./BasketProductElement.css";
 
-type Props = {};
+type Props = {
+  brandName: string;
+  productId: number;
+  Name: string;
+  Quantity: number;
+  Price: number;
+  isSelected: number;
+};
 
 const BasketProductElement = (props: Props) => {
   // Checkbox durumunu yönetmek için useState kullanıyoruz
@@ -14,12 +21,18 @@ const BasketProductElement = (props: Props) => {
 
   return (
     <div className="basket-element-product-element">
-      <div className="basket-element-product-element-brand">Samsung</div>
-      <div className="basket-element-product-element-product-name">
-        Galaxy M34 5G 6 GB 128 GB Koyu Mavi 128 GB
+      <div className="basket-element-product-element-brand">
+        {props.brandName}
       </div>
-      <div className="basket-element-product-element-quantity">1 Adet</div>
-      <div className="basket-element-product-element-unit-price">9800 ₺</div>
+      <div className="basket-element-product-element-product-name">
+        {props.Name}
+      </div>
+      <div className="basket-element-product-element-quantity">
+        {props.Quantity + " adet"}
+      </div>
+      <div className="basket-element-product-element-unit-price">
+        {props.Price + " ₺"}
+      </div>
       <div className="basket-element-product-element-button">
         <button type="button" className="btn btn-warning ">
           -
