@@ -11,15 +11,12 @@ import { getListBasketProductDto } from "../../models/BasketProduct/getListBaske
 import deliveryAddressService from "../../services/deliveryAddressService";
 import { setDeliveryAddresses } from "../../store/deliveryAddress/deliveryAddressSlice";
 import { DeliveryAddressDto } from "../../models/DeliveryAddress/DeliveryAddressDto";
+import orderManagementService from "../../services/orderManagementService";
 
 type Props = {};
 
 const PurchaseElement = (props: Props) => {
   const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate("/orders");
-  };
 
   const dispatch = useDispatch();
   const customerId: number | null = useSelector(
@@ -76,6 +73,26 @@ const PurchaseElement = (props: Props) => {
 
   console.log(deliveryAddresses);
 
+  // Complete Order
+  async function completeOrder(customerId: number, deliveryAddressId: number) {
+    try {
+      await orderManagementService.completeOrder(customerId, deliveryAddressId);
+    } catch (error) {
+      console.error("Sipariş oluştururken bir hata oluştur:", error);
+    }
+  }
+
+  const handleButtonClick = () => {
+    if (selectedDeliveryAddress && customerId) {
+      completeOrder(customerId, selectedDeliveryAddress);
+    }
+    navigate("/orders");
+  };
+
+  const selectedDeliveryAddress: number | null = useSelector(
+    (state: RootState) => state.deliveryAddress.selectedDeliveryAddress
+  );
+
   return (
     <div className="purchase-element">
       <div className="purchase-element-content">
@@ -126,10 +143,10 @@ const PurchaseElement = (props: Props) => {
               />
             ))}
         </div>
-        <div className="purchase-element-total-price">
+        {/* <div className="purchase-element-total-price">
           <span>Toplam Sipariş Tutarı</span>
           <span>15960 ₺</span>
-        </div>
+        </div> */}
         <div className="purchase-element-complete-order">
           <button
             type="button"
