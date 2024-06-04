@@ -16,6 +16,10 @@ const ProductFavoriteElement = (props: Props) => {
     (state: RootState) => state.customer.customerId
   );
 
+  const refreshData = useSelector(
+    (state: any) => state.customerProductFavorite.refreshData
+  );
+
   // CustomerProductFavorite -----------------------------
   async function fetchCustomerProductFavoritesData(customerId: number) {
     try {
@@ -34,7 +38,7 @@ const ProductFavoriteElement = (props: Props) => {
     if (customerId) {
       fetchCustomerProductFavoritesData(customerId);
     }
-  }, [customerId]);
+  }, [customerId, refreshData]);
 
   const getListCustomerProductFavoriteDto: getListCustomerProductFavoriteDto[] =
     useSelector(

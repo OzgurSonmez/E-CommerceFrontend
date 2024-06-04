@@ -14,6 +14,7 @@ type Props = {};
 const Products = (props: Props) => {
   const dispatch = useDispatch();
 
+  const refreshData = useSelector((state: any) => state.product.refreshData);
   // Filter State
   const filterState = useSelector((state: RootState) => state.filter);
 
@@ -43,7 +44,7 @@ const Products = (props: Props) => {
 
   useEffect(() => {
     fetchProductData();
-  }, [filterState]);
+  }, [filterState, refreshData]);
 
   const getListFilteredProductDto: getListFilteredProductDto[] = useSelector(
     (state: RootState) => state.product.products

@@ -1,8 +1,9 @@
 import React from "react";
 import "./CustomerProductFavoriteElement.css";
 import customerProductFavoriteService from "../../services/customerProductFavoriteService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
+import { refreshData } from "../../store/customerProductFavorite/customerProductFavoriteSlice";
 type Props = {
   productId: number;
   brandName: string;
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const CustomerProductFavoriteElement = (props: Props) => {
+  const dispatch = useDispatch();
+
   const customerId: number | null = useSelector(
     (state: RootState) => state.customer.customerId
   );
@@ -22,6 +25,7 @@ const CustomerProductFavoriteElement = (props: Props) => {
           customerId,
           props.productId
         );
+        dispatch(refreshData());
       } catch (error) {
         console.error("Ürünü favoriden silme hatası:", error);
       }

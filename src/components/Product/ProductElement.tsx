@@ -2,9 +2,10 @@ import React from "react";
 import "./ProductElement.css";
 import { AddProductToBasketRequest } from "../../models/BasketProduct/addProductToBasketRequest";
 import basketProductService from "../../services/basketProductService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
 import customerProductFavoriteService from "../../services/customerProductFavoriteService";
+import { refreshData } from "../../store/product/productSlice";
 
 type Props = {
   productId: number;
@@ -17,6 +18,8 @@ type Props = {
 };
 
 const ProductElement = (props: Props) => {
+  const dispatch = useDispatch();
+
   const basketId: number | null = useSelector(
     (state: RootState) => state.basket.basketId
   );
@@ -46,6 +49,7 @@ const ProductElement = (props: Props) => {
           customerId,
           props.productId
         );
+        dispatch(refreshData());
       } catch (error) {
         console.error("Ürünü favoriden silme hatası:", error);
       }

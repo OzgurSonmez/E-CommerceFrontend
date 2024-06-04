@@ -23,6 +23,10 @@ const BasketElement = (props: Props) => {
     (state: RootState) => state.customer.customerId
   );
 
+  const refreshData = useSelector(
+    (state: any) => state.basketProduct.refreshData
+  );
+
   // BasketProducts -----------------------------
   async function fetchBasketProductsData(customerId: number) {
     try {
@@ -39,7 +43,7 @@ const BasketElement = (props: Props) => {
     if (customerId) {
       fetchBasketProductsData(customerId);
     }
-  }, [customerId]);
+  }, [customerId, refreshData]);
 
   const getListBasketProductDto: getListBasketProductDto[] = useSelector(
     (state: RootState) => state.basketProduct.basketProducts

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./BasketProductElement.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
 import basketProductService from "../../services/basketProductService";
 import { AddProductToBasketRequest } from "../../models/BasketProduct/addProductToBasketRequest";
+import { refreshData } from "../../store/basketProduct/basketProductSlice";
 
 type Props = {
   brandName: string;
@@ -15,6 +16,8 @@ type Props = {
 };
 
 const BasketProductElement = (props: Props) => {
+  const dispatch = useDispatch();
+
   // Checkbox durumunu yönetmek için useState kullanıyoruz
   const [isChecked, setIsChecked] = useState(props.isSelected === 1);
 
@@ -49,6 +52,7 @@ const BasketProductElement = (props: Props) => {
           basketId,
           props.productId
         );
+        dispatch(refreshData());
       } catch (error) {
         console.error("Ürünü sepetten silme hatası:", error);
       }
@@ -65,6 +69,7 @@ const BasketProductElement = (props: Props) => {
           isSelected: 1,
         };
         await basketProductService.decreaseProductToBasket(request);
+        dispatch(refreshData());
       } catch (error) {
         console.error("Ürünü sepetten azaltma hatası:", error);
       }
@@ -81,6 +86,7 @@ const BasketProductElement = (props: Props) => {
           isSelected: 1,
         };
         await basketProductService.addProductToBasket(request);
+        dispatch(refreshData());
       } catch (error) {
         console.error("Ürünü sepette arttırma hatası:", error);
       }
