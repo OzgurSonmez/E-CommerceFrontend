@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProductFilter.css";
+import { useDispatch, useSelector } from "react-redux";
+import categoryService from "../../services/categoryService";
+import { setCategories } from "../../store/category/categorySlice";
+import { getListCategoryDto } from "../../models/Category/getListCategoryDto";
+import { RootState } from "../../store/configureStore";
 type Props = {};
 
 const ProductFilter = (props: Props) => {
+  const dispatch = useDispatch();
+  // Categories
+
+  async function fetchCategoriesData() {
+    try {
+      const categoryResponse = await categoryService.getCategories();
+      const data = categoryResponse.data;
+      dispatch(setCategories(data));
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchCategoriesData();
+  }, []);
+
+  const getListCategoryDto: getListCategoryDto[] = useSelector(
+    (state: RootState) => state.category.categories
+  );
+
+  console.log(getListCategoryDto);
   return (
     <div className="product-filter-component">
       <div className="product-filter-element">
@@ -17,43 +44,34 @@ const ProductFilter = (props: Props) => {
               <i className="bi bi-chevron-down filter-by-product-category-icon"></i>
             </button>
             <ul className="dropdown-menu filter-by-product-category-menu">
-              <li>
-                <input
-                  className="filter-by-product-category-menu-checkbox"
-                  type="checkbox"
-                ></input>
-                <label className="filter-by-product-category-menu-content">
-                  1
-                </label>
-              </li>
-              <li>
-                <input
-                  className="filter-by-product-category-menu-checkbox"
-                  type="checkbox"
-                ></input>
-                <label className="filter-by-product-category-menu-content">
-                  2
-                </label>
-              </li>
+              {getListCategoryDto.map((category, index) => (
+                <li key={index}>
+                  <button
+                    className="filter-by-product-category-menu-checkbox"
+                    value={category.categoryId} // Değişiklik: Kategori adını checkbox değeri olarak atadık
+                  >
+                    <span className="filter-by-product-category-menu-content">
+                      {category.categoryName}
+                    </span>
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         <div className="filter-by-product-brand">
-          <div
+          <button
             className="dropdown filter-by-product-brand-element"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <input
-              className="filter-by-product-brand-input "
-              placeholder="Marka"
-            ></input>
+            <span>Marka</span>
             <div className="filter-by-product-brand-icons">
               <i className="bi bi-three-dots-vertical filter-by-product-brand-icon"></i>
               <i className="bi bi-chevron-down filter-by-product-brand-icon"></i>
             </div>
-          </div>
+          </button>
 
           <ul className="dropdown-menu filter-by-product-brand-menu">
             <li>

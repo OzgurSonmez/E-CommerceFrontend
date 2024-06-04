@@ -65,7 +65,7 @@
 .filter-by-product-category-button span {
   padding-left: 10px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .filter-by-product-category-icon {
@@ -85,6 +85,12 @@
 
 .filter-by-product-category-menu li {
   font-size: 16px;
+  border-bottom: 1px solid #828282;
+}
+
+.filter-by-product-category-menu-checkbox {
+  border: none;
+  background: none;
 }
 
 .filter-by-product-category-menu-checkbox:checked {
@@ -117,6 +123,10 @@
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 10px;
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .filter-by-product-brand-input {

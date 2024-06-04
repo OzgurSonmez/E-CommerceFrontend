@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getListFilteredProductDto } from "../../../models/Product/getListFilteredProductDto";
+import { getListFilteredProductDto } from "../../models/Product/getListFilteredProductDto";
 
 interface ProductState {
   products: getListFilteredProductDto[];

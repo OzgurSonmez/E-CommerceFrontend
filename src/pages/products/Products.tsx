@@ -5,9 +5,9 @@ import ProductFilter from "../../components/Product/ProductFilter";
 import { useDispatch, useSelector } from "react-redux";
 import productService from "../../services/productService";
 import { FilteredProductRequestDto } from "../../models/Product/filteredProductRequestDto";
-import { setFilteredProducts } from "../store/product/productSlice";
 import { getListFilteredProductDto } from "../../models/Product/getListFilteredProductDto";
-import { RootState } from "../store/configureStore";
+import { setFilteredProducts } from "../../store/product/productSlice";
+import { RootState } from "../../store/configureStore";
 
 type Props = {};
 
@@ -44,7 +44,7 @@ const Products = (props: Props) => {
     (state: RootState) => state.product.products
   );
 
-  console.log(getListFilteredProductDto);
+  //console.log(getListFilteredProductDto);
 
   return (
     <div className="product-page">
