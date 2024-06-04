@@ -4,11 +4,13 @@ import { persistReducer } from "redux-persist";
 import { productReducer } from "./product/productSlice";
 import { categoryReducer } from "./category/categorySlice";
 import { brandReducer } from "./brand/brandSlice";
+import { filterReducer } from "./product/filterSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
   category: categoryReducer,
   brand: brandReducer,
+  filter: filterReducer,
 });
 
 const persistConfig = {

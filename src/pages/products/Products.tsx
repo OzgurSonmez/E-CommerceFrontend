@@ -14,14 +14,19 @@ type Props = {};
 const Products = (props: Props) => {
   const dispatch = useDispatch();
 
+  // Filter State
+  const filterState = useSelector((state: RootState) => state.filter);
+
+  console.log(filterState);
+
   const filteredProductRequestDto: FilteredProductRequestDto = {
-    categoryId: null,
-    brandId: null,
-    productName: null,
-    minPrice: null,
-    maxPrice: null,
-    orderBy: null,
-    orderDirection: null,
+    categoryId: filterState.categoryId,
+    brandId: filterState.brandId,
+    productName: filterState.productName,
+    minPrice: filterState.minPrice,
+    maxPrice: filterState.maxPrice,
+    orderBy: filterState.orderBy,
+    orderDirection: filterState.orderDirection,
   };
 
   async function fetchProductData() {
@@ -38,7 +43,7 @@ const Products = (props: Props) => {
 
   useEffect(() => {
     fetchProductData();
-  }, []);
+  }, [filterState]);
 
   const getListFilteredProductDto: getListFilteredProductDto[] = useSelector(
     (state: RootState) => state.product.products

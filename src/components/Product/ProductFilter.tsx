@@ -8,13 +8,22 @@ import { RootState } from "../../store/configureStore";
 import brandService from "../../services/brandService";
 import { setBrands } from "../../store/brand/brandSlice";
 import { getListBrandDto } from "../../models/Brand/getListBrandDto";
+import {
+  setBrandId,
+  setCategoryId,
+  setMaxPrice,
+  setMinPrice,
+  setOrderBy,
+  setOrderDirection,
+  setProductName,
+} from "../../store/product/filterSlice";
+
 type Props = {};
 
 const ProductFilter = (props: Props) => {
   const dispatch = useDispatch();
 
-  // Categories -----------------------------
-
+  // Kategoriler -----------------------------
   async function fetchCategoriesData() {
     try {
       const categoryResponse = await categoryService.getCategories();
@@ -33,8 +42,7 @@ const ProductFilter = (props: Props) => {
     (state: RootState) => state.category.categories
   );
 
-  // Brands ----------------------------------
-
+  // Markalar ----------------------------------
   async function fetchBrandsData() {
     try {
       const brandResponse = await brandService.getBrands();
@@ -73,7 +81,10 @@ const ProductFilter = (props: Props) => {
                   <li key={index}>
                     <button
                       className="filter-by-product-category-menu-checkbox"
-                      value={category.categoryId} // Değişiklik: Kategori adını checkbox değeri olarak atadık
+                      onClick={() =>
+                        dispatch(setCategoryId(category.categoryId))
+                      }
+                      value={category.categoryId}
                     >
                       <span className="filter-by-product-category-menu-content">
                         {category.categoryName}
@@ -105,6 +116,7 @@ const ProductFilter = (props: Props) => {
                 <li key={index}>
                   <button
                     className="filter-by-product-brand-menu-button"
+                    onClick={() => dispatch(setBrandId(brand.brandId))}
                     value={brand.brandId}
                   >
                     {brand.brandName}
@@ -118,6 +130,7 @@ const ProductFilter = (props: Props) => {
           <input
             className="product-filter-search-box-input"
             placeholder="Arama"
+            onChange={(e) => dispatch(setProductName(e.target.value))}
           />
           <button className="product-filter-search-box-button">
             <i className="bi bi-search product-filter-search-box-icon"></i>
@@ -130,12 +143,14 @@ const ProductFilter = (props: Props) => {
             id="min-price"
             name="min-price"
             placeholder="Minimum fiyat"
+            onChange={(e) => dispatch(setMinPrice(Number(e.target.value)))}
           />
           <input
             type="number"
             id="max-price"
             name="max-price"
             placeholder="Maksimum fiyat"
+            onChange={(e) => dispatch(setMaxPrice(Number(e.target.value)))}
           />
         </div>
 
@@ -151,29 +166,93 @@ const ProductFilter = (props: Props) => {
             </button>
             <ul className="dropdown-menu sorting-bar-menu">
               <li>
-                <button>Fiyata göre artan</button>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("price"));
+                    dispatch(setOrderDirection("ascending"));
+                  }}
+                >
+                  Fiyata göre artan
+                </button>
               </li>
               <li>
-                <button>Fiyata göre azalan</button>
-              </li>
-
-              <li>
-                <button>İndirime göre artan</button>
-              </li>
-              <li>
-                <button>İndirime göre azalan</button>
-              </li>
-              <li>
-                <button>Favoriye göre artan</button>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("price"));
+                    dispatch(setOrderDirection("descending"));
+                  }}
+                >
+                  Fiyata göre azalan
+                </button>
               </li>
               <li>
-                <button>Favoriye göre azalan</button>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("discount"));
+                    dispatch(setOrderDirection("ascending"));
+                  }}
+                >
+                  İndirime göre artan
+                </button>
               </li>
               <li>
-                <button>Varsayılan</button>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("discount"));
+                    dispatch(setOrderDirection("descending"));
+                  }}
+                >
+                  İndirime göre azalan
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("favcount"));
+                    dispatch(setOrderDirection("ascending"));
+                  }}
+                >
+                  Favoriye göre artan
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy("favcount"));
+                    dispatch(setOrderDirection("descendingc"));
+                  }}
+                >
+                  Favoriye göre azalan
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    dispatch(setOrderBy(null));
+                    dispatch(setOrderDirection(null));
+                  }}
+                >
+                  Varsayılan
+                </button>
               </li>
             </ul>
           </div>
+        </div>
+        <div>
+          <button
+            className="filter-by-product-clean-filters"
+            onClick={() => {
+              dispatch(setCategoryId(null));
+              dispatch(setBrandId(null));
+              dispatch(setProductName(null));
+              dispatch(setMinPrice(null));
+              dispatch(setMaxPrice(null));
+              dispatch(setOrderBy(null));
+              dispatch(setOrderDirection(null));
+            }}
+          >
+            X Filtreleri Temizle
+          </button>
         </div>
       </div>
     </div>

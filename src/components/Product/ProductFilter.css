@@ -239,20 +239,9 @@
 
 /*--------------------------------------------------*/
 
-.filter-by-read {
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
-  border-radius: 50%;
-}
-
-.read-toggle-button {
+.filter-by-product-clean-filters {
   border: none;
   background: none;
-  width: 100%;
-  height: 100%;
-  padding: 0px 7px;
-}
-
-.read-toggle-button i {
-  font-size: 25px;
-  color: #8015ea;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 0px 16px;
+  border-radius: 20px;
 }
