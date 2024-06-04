@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import OrderProductElement from "../Order/OrderProductElement";
 import "./PurchaseElement.css";
 import AddressDetail from "./AddressDetail";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +11,7 @@ import deliveryAddressService from "../../services/deliveryAddressService";
 import { setDeliveryAddresses } from "../../store/deliveryAddress/deliveryAddressSlice";
 import { DeliveryAddressDto } from "../../models/DeliveryAddress/DeliveryAddressDto";
 import orderManagementService from "../../services/orderManagementService";
+import PurchaseProductElement from "./PurchaseProductElement";
 
 type Props = {};
 
@@ -134,7 +134,7 @@ const PurchaseElement = (props: Props) => {
           {getListSelectedBasketProductDto &&
             getListSelectedBasketProductDto.length > 0 &&
             getListSelectedBasketProductDto.map((value, index) => (
-              <OrderProductElement
+              <PurchaseProductElement
                 key={index}
                 brandName={value.brandName}
                 productName={value.productName}

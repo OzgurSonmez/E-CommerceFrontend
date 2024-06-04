@@ -1,0 +1,28 @@
+.purchase-element-product-element {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  color: #171717 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 3px;
+  border-bottom: #828282 1px solid;
+}
+
+.purchase-element-product-element-brand {
+  width: 15%;
+}
+
+.purchase-element-product-element-product-name {
+  width: 65%;
+}
+
+.purchase-element-product-element-quantity {
+  width: 10%;
+}
+
+.purchase-element-product-element-unit-price {
+  width: 10%;
+}
