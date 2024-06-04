@@ -3,10 +3,12 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { productReducer } from "./product/productSlice";
 import { categoryReducer } from "./category/categorySlice";
+import { brandReducer } from "./brand/brandSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
   category: categoryReducer,
+  brand: brandReducer,
 });
 
 const persistConfig = {

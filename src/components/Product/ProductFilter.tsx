@@ -5,11 +5,15 @@ import categoryService from "../../services/categoryService";
 import { setCategories } from "../../store/category/categorySlice";
 import { getListCategoryDto } from "../../models/Category/getListCategoryDto";
 import { RootState } from "../../store/configureStore";
+import brandService from "../../services/brandService";
+import { setBrands } from "../../store/brand/brandSlice";
+import { getListBrandDto } from "../../models/Brand/getListBrandDto";
 type Props = {};
 
 const ProductFilter = (props: Props) => {
   const dispatch = useDispatch();
-  // Categories
+
+  // Categories -----------------------------
 
   async function fetchCategoriesData() {
     try {
@@ -29,7 +33,26 @@ const ProductFilter = (props: Props) => {
     (state: RootState) => state.category.categories
   );
 
-  console.log(getListCategoryDto);
+  // Brands ----------------------------------
+
+  async function fetchBrandsData() {
+    try {
+      const brandResponse = await brandService.getBrands();
+      const data = brandResponse.data;
+      dispatch(setBrands(data));
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchBrandsData();
+  }, []);
+
+  const getListBrandDto: getListBrandDto[] = useSelector(
+    (state: RootState) => state.brand.brands
+  );
+
   return (
     <div className="product-filter-component">
       <div className="product-filter-element">
@@ -44,18 +67,20 @@ const ProductFilter = (props: Props) => {
               <i className="bi bi-chevron-down filter-by-product-category-icon"></i>
             </button>
             <ul className="dropdown-menu filter-by-product-category-menu">
-              {getListCategoryDto.map((category, index) => (
-                <li key={index}>
-                  <button
-                    className="filter-by-product-category-menu-checkbox"
-                    value={category.categoryId} // Değişiklik: Kategori adını checkbox değeri olarak atadık
-                  >
-                    <span className="filter-by-product-category-menu-content">
-                      {category.categoryName}
-                    </span>
-                  </button>
-                </li>
-              ))}
+              {getListCategoryDto &&
+                getListCategoryDto.length > 0 &&
+                getListCategoryDto.map((category, index) => (
+                  <li key={index}>
+                    <button
+                      className="filter-by-product-category-menu-checkbox"
+                      value={category.categoryId} // Değişiklik: Kategori adını checkbox değeri olarak atadık
+                    >
+                      <span className="filter-by-product-category-menu-content">
+                        {category.categoryName}
+                      </span>
+                    </button>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -74,21 +99,18 @@ const ProductFilter = (props: Props) => {
           </button>
 
           <ul className="dropdown-menu filter-by-product-brand-menu">
-            <li>
-              <button className="filter-by-product-brand-menu-button">
-                Asus
-              </button>
-            </li>
-            <li>
-              <button className="filter-by-product-brand-menu-button">
-                Apple
-              </button>
-            </li>
-            <li>
-              <button className="filter-by-product-brand-menu-button">
-                Lg
-              </button>
-            </li>
+            {getListBrandDto &&
+              getListBrandDto.length > 0 &&
+              getListBrandDto.map((brand, index) => (
+                <li key={index}>
+                  <button
+                    className="filter-by-product-brand-menu-button"
+                    value={brand.brandId}
+                  >
+                    {brand.brandName}
+                  </button>
+                </li>
+              ))}
           </ul>
         </div>
 
