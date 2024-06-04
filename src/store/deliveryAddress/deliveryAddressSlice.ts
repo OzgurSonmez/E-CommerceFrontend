@@ -3,11 +3,13 @@ import { DeliveryAddressDto } from "../../models/DeliveryAddress/DeliveryAddress
 
 interface DeliveryAddressesState {
   deliveryAddresses: DeliveryAddressDto[];
+  selectedDeliveryAddress: number | null;
   refreshData: boolean;
 }
 
 const initialState: DeliveryAddressesState = {
   deliveryAddresses: [],
+  selectedDeliveryAddress: 0,
   refreshData: false,
 };
 
@@ -21,6 +23,9 @@ const deliveryAddressSlice = createSlice({
     ) => {
       state.deliveryAddresses = action.payload;
     },
+    setSelectedDeliveryAddress: (state, action: PayloadAction<number>) => {
+      state.selectedDeliveryAddress = action.payload;
+    },
     refreshData: (state) => {
       state.refreshData = !state.refreshData;
     },
@@ -28,5 +33,5 @@ const deliveryAddressSlice = createSlice({
 });
 
 export const deliveryAddressReducer = deliveryAddressSlice.reducer;
-export const { setDeliveryAddresses, refreshData } =
+export const { setDeliveryAddresses, setSelectedDeliveryAddress, refreshData } =
   deliveryAddressSlice.actions;
