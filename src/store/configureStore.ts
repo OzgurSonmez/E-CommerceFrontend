@@ -8,6 +8,7 @@ import { filterReducer } from "./product/filterSlice";
 import { emailReducer } from "./email/emailSlice";
 import { customerReducer } from "./customer/customerSlice";
 import { basketProductReducer } from "./basketProduct/basketProductSlice";
+import { basketReducer } from "./basket/basketSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   email: emailReducer,
   customer: customerReducer,
   basketProduct: basketProductReducer,
+  basket: basketReducer,
 });
 
 const persistConfig = {

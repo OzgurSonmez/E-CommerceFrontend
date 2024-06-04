@@ -2,11 +2,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface EmailState {
   emailId: number | null;
+  emailAddress: string | null;
   refreshData: boolean;
 }
 
 const initialState: EmailState = {
   emailId: null,
+  emailAddress: "",
   refreshData: false,
 };
 
@@ -17,6 +19,9 @@ const emailSlice = createSlice({
     setEmailId: (state, action: PayloadAction<number | null>) => {
       state.emailId = action.payload;
     },
+    setEmailAddress: (state, action: PayloadAction<string | null>) => {
+      state.emailAddress = action.payload;
+    },
     refreshData: (state) => {
       state.refreshData = !state.refreshData;
     },
@@ -24,4 +29,4 @@ const emailSlice = createSlice({
 });
 
 export const emailReducer = emailSlice.reducer;
-export const { setEmailId, refreshData } = emailSlice.actions;
+export const { setEmailId, setEmailAddress, refreshData } = emailSlice.actions;

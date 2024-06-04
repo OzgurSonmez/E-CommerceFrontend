@@ -7,7 +7,7 @@ class basketProductService {
   public apiUrl: string;
 
   constructor() {
-    this.apiUrl = BASE_API_URL + "BasketProduct";
+    this.apiUrl = BASE_API_URL + "BasketProducts";
   }
 
   async getBasketProductByCustomerId(
