@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OrderProductElement from "../Order/OrderProductElement";
 import "./PurchaseElement.css";
 import AddressDetail from "./AddressDetail";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/configureStore";
+import basketProductService from "../../services/basketProductService";
+import { setSelectedBasketProducts } from "../../store/basketProduct/basketProductSlice";
+import { getListBasketProductDto } from "../../models/BasketProduct/getListBasketProductDto";
 
 type Props = {};
 
@@ -12,6 +17,37 @@ const PurchaseElement = (props: Props) => {
   const handleButtonClick = () => {
     navigate("/orders");
   };
+
+  const dispatch = useDispatch();
+  const customerId: number | null = useSelector(
+    (state: RootState) => state.customer.customerId
+  );
+
+  // BasketProducts -----------------------------
+  async function fetchBasketProductsData(customerId: number) {
+    try {
+      const basketProductsResponse =
+        await basketProductService.getSelectedBasketProductByCustomerId(
+          customerId
+        );
+      const data = basketProductsResponse.data;
+      dispatch(setSelectedBasketProducts(data));
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (customerId) {
+      fetchBasketProductsData(customerId);
+    }
+  }, [customerId]);
+
+  const getListSelectedBasketProductDto: getListBasketProductDto[] =
+    useSelector(
+      (state: RootState) => state.basketProduct.selectedBasketProducts
+    );
+
   return (
     <div className="purchase-element">
       <div className="purchase-element-content">
@@ -42,8 +78,17 @@ const PurchaseElement = (props: Props) => {
               Birim Fiyat
             </span>
           </div>
-          <OrderProductElement />
-          <OrderProductElement />
+          {getListSelectedBasketProductDto &&
+            getListSelectedBasketProductDto.length > 0 &&
+            getListSelectedBasketProductDto.map((value, index) => (
+              <OrderProductElement
+                key={index}
+                brandName={value.brandName}
+                productName={value.productName}
+                productQuantity={value.productQuantity}
+                productPrice={value.productPrice}
+              />
+            ))}
         </div>
         <div className="purchase-element-total-price">
           <span>Toplam Sipariş Tutarı</span>

@@ -3,11 +3,13 @@ import { getListBasketProductDto } from "../../models/BasketProduct/getListBaske
 
 interface BasketProductState {
   basketProducts: getListBasketProductDto[];
+  selectedBasketProducts: getListBasketProductDto[];
   refreshData: boolean;
 }
 
 const initialState: BasketProductState = {
   basketProducts: [],
+  selectedBasketProducts: [],
   refreshData: false,
 };
 
@@ -21,6 +23,12 @@ const basketProductSlice = createSlice({
     ) => {
       state.basketProducts = action.payload;
     },
+    setSelectedBasketProducts: (
+      state,
+      action: PayloadAction<getListBasketProductDto[]>
+    ) => {
+      state.selectedBasketProducts = action.payload;
+    },
     refreshData: (state) => {
       state.refreshData = !state.refreshData;
     },
@@ -28,4 +36,5 @@ const basketProductSlice = createSlice({
 });
 
 export const basketProductReducer = basketProductSlice.reducer;
-export const { setBasketProducts, refreshData } = basketProductSlice.actions;
+export const { setBasketProducts, setSelectedBasketProducts, refreshData } =
+  basketProductSlice.actions;

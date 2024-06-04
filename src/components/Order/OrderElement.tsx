@@ -51,11 +51,11 @@ const OrderElement = (props: Props) => {
               Birim Fiyat
             </span>
           </div>
+          {/* <OrderProductElement />
           <OrderProductElement />
           <OrderProductElement />
           <OrderProductElement />
-          <OrderProductElement />
-          <OrderProductElement />
+          <OrderProductElement /> */}
         </div>
       </div>
     </div>

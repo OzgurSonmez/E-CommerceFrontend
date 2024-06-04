@@ -76,6 +76,16 @@ class basketProductService {
         productId
     );
   }
+
+  async getSelectedBasketProductByCustomerId(
+    customerId: number
+  ): Promise<AxiosResponse<any, getListBasketProductDto>> {
+    return axiosInstance.get<any>(
+      this.apiUrl +
+        "/getSelectedBasketProductByCustomerId?customerId=" +
+        customerId
+    );
+  }
 }
 
 export default new basketProductService();
