@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import "./AddressDetail.css";
 
-type Props = {};
+type Props = {
+  deliveryAddressId: number;
+  fullName: string;
+  deliveryAddressDetail: string;
+  phoneNumber: string;
+};
 
 const AddressDetail = (props: Props) => {
   return (
     <div className="purchase-element-delivery-adress-detail">
       <div className="delivery-adress-detail-content">
-        <span>Özgür Sönmez</span>
-        <span>Esenyalı Mh. Vatan Cd. No:1 D:1 Pendik / İstanbul / Türkiye</span>
-        <span>0544 607 1048</span>
+        <span>{props.fullName}</span>
+        <span>{props.deliveryAddressDetail}</span>
+        <span>{props.phoneNumber}</span>
       </div>
       <div className="delivery-adress-radio-button">
         <input

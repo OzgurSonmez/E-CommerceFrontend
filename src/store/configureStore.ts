@@ -1,3 +1,4 @@
+import { deliveryAddressReducer } from "./deliveryAddress/deliveryAddressSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   customer: customerReducer,
   basketProduct: basketProductReducer,
   basket: basketReducer,
+  deliveryAddress: deliveryAddressReducer,
 });
 
 const persistConfig = {

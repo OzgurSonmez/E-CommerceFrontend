@@ -8,6 +8,9 @@ import { RootState } from "../../store/configureStore";
 import basketProductService from "../../services/basketProductService";
 import { setSelectedBasketProducts } from "../../store/basketProduct/basketProductSlice";
 import { getListBasketProductDto } from "../../models/BasketProduct/getListBasketProductDto";
+import deliveryAddressService from "../../services/deliveryAddressService";
+import { setDeliveryAddresses } from "../../store/deliveryAddress/deliveryAddressSlice";
+import { DeliveryAddressDto } from "../../models/DeliveryAddress/DeliveryAddressDto";
 
 type Props = {};
 
@@ -43,10 +46,35 @@ const PurchaseElement = (props: Props) => {
     }
   }, [customerId]);
 
+  // DeliveryAddresses -----------------------------
+  async function fetchDeliveryAddressesData(customerId: number) {
+    try {
+      const deliveryAddressesResponse =
+        await deliveryAddressService.getDeliveryAddresses(customerId);
+
+      const data = deliveryAddressesResponse.data;
+      dispatch(setDeliveryAddresses(data));
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (customerId) {
+      fetchDeliveryAddressesData(customerId);
+    }
+  }, [customerId]);
+
   const getListSelectedBasketProductDto: getListBasketProductDto[] =
     useSelector(
       (state: RootState) => state.basketProduct.selectedBasketProducts
     );
+
+  const deliveryAddresses: DeliveryAddressDto[] = useSelector(
+    (state: RootState) => state.deliveryAddress.deliveryAddresses
+  );
+
+  console.log(deliveryAddresses);
 
   return (
     <div className="purchase-element">
@@ -58,9 +86,17 @@ const PurchaseElement = (props: Props) => {
           <div className="purchase-element-delivery-adress-title">
             Teslimat Adresi
           </div>
-          <AddressDetail />
-          <AddressDetail />
-          <AddressDetail />
+          {deliveryAddresses &&
+            deliveryAddresses.length > 0 &&
+            deliveryAddresses.map((value, index) => (
+              <AddressDetail
+                key={index}
+                deliveryAddressDetail={value.deliveryAddressDetail}
+                deliveryAddressId={value.deliveryAddressId}
+                fullName={value.fullName}
+                phoneNumber={value.phoneNumber}
+              />
+            ))}
         </div>
         <div className="purchase-element-products">
           <div className="purchase-element-products-title">Ürünler</div>
