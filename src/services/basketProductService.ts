@@ -63,6 +63,19 @@ class basketProductService {
         requestBody.isSelected
     );
   }
+
+  reverseSelectedStatusOfTheProductInBasket(
+    basketId: number,
+    productId: number
+  ): Promise<AxiosResponse<any, any>> {
+    return axiosInstance.post<any>(
+      this.apiUrl +
+        "/reverseSelectedStatusOfTheProductInBasket?basketId=" +
+        basketId +
+        "&ProductId=" +
+        productId
+    );
+  }
 }
 
 export default new basketProductService();

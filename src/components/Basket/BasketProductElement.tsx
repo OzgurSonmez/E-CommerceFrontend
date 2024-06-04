@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./BasketProductElement.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
@@ -16,11 +16,26 @@ type Props = {
 
 const BasketProductElement = (props: Props) => {
   // Checkbox durumunu yönetmek için useState kullanıyoruz
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(props.isSelected === 1);
+
+  useEffect(() => {
+    setIsChecked(props.isSelected === 1);
+  }, [props.isSelected]);
 
   // Checkbox'ın durumunu değiştiren fonksiyon
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handleCheckboxChange = async () => {
+    const newCheckedStatus = !isChecked;
+    setIsChecked(newCheckedStatus);
+    if (basketId) {
+      try {
+        await basketProductService.reverseSelectedStatusOfTheProductInBasket(
+          basketId,
+          props.productId
+        );
+      } catch (error) {
+        console.error("Ürünü sepetten silme hatası:", error);
+      }
+    }
   };
 
   const basketId: number | null = useSelector(
