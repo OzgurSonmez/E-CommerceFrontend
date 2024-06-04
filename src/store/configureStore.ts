@@ -5,12 +5,14 @@ import { productReducer } from "./product/productSlice";
 import { categoryReducer } from "./category/categorySlice";
 import { brandReducer } from "./brand/brandSlice";
 import { filterReducer } from "./product/filterSlice";
+import { emailReducer } from "./email/emailSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
   category: categoryReducer,
   brand: brandReducer,
   filter: filterReducer,
+  email: emailReducer,
 });
 
 const persistConfig = {

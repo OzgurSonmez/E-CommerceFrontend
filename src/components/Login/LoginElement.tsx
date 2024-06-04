@@ -3,6 +3,7 @@ import "./LoginElement.css";
 import { LoginDto } from "../../models/Auth/loginRequestBody";
 import authManagementService from "../../services/authManagementService";
 import { Field, Form, Formik } from "formik";
+import emailService from "../../services/emailService";
 
 type Props = {};
 
@@ -16,6 +17,15 @@ const LoginElement = (props: Props) => {
     try {
       await authManagementService.login(values);
       console.log("Giriş başarılı!");
+      try {
+        const emailResponse = await emailService.getEmailIdByEmailAddress(
+          values.emailAddress
+        );
+        const data = emailResponse.data;
+        console.log(data.emailId);
+      } catch (error) {
+        console.error("EmailId hatası:", error);
+      }
     } catch (error) {
       console.error("Giriş hatası:", error);
     }
