@@ -72,7 +72,6 @@ const ProductFilter = (props: Props) => {
               aria-expanded="false"
             >
               <span>Kategori</span>
-              <i className="bi bi-chevron-down filter-by-product-category-icon"></i>
             </button>
             <ul className="dropdown-menu filter-by-product-category-menu">
               {getListCategoryDto &&
@@ -103,10 +102,7 @@ const ProductFilter = (props: Props) => {
             aria-expanded="false"
           >
             <span>Marka</span>
-            <div className="filter-by-product-brand-icons">
-              <i className="bi bi-three-dots-vertical filter-by-product-brand-icon"></i>
-              <i className="bi bi-chevron-down filter-by-product-brand-icon"></i>
-            </div>
+            <div className="filter-by-product-brand-icons"></div>
           </button>
 
           <ul className="dropdown-menu filter-by-product-brand-menu">
@@ -132,9 +128,7 @@ const ProductFilter = (props: Props) => {
             placeholder="Arama"
             onChange={(e) => dispatch(setProductName(e.target.value))}
           />
-          <button className="product-filter-search-box-button">
-            <i className="bi bi-search product-filter-search-box-icon"></i>
-          </button>
+          <button className="product-filter-search-box-button"></button>
         </div>
 
         <div className="product-filter-price">
@@ -162,7 +156,6 @@ const ProductFilter = (props: Props) => {
               aria-expanded="false"
             >
               <span>Sıralama</span>
-              <i className="bi bi-chevron-down sorting-bar-icon"></i>
             </button>
             <ul className="dropdown-menu sorting-bar-menu">
               <li>
