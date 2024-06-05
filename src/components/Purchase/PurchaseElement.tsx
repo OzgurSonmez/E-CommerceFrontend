@@ -12,6 +12,7 @@ import { setDeliveryAddresses } from "../../store/deliveryAddress/deliveryAddres
 import { DeliveryAddressDto } from "../../models/DeliveryAddress/DeliveryAddressDto";
 import orderManagementService from "../../services/orderManagementService";
 import PurchaseProductElement from "./PurchaseProductElement";
+import { refreshData } from "../../store/customerOrder/customerOrderSlice";
 
 type Props = {};
 
@@ -71,8 +72,6 @@ const PurchaseElement = (props: Props) => {
     (state: RootState) => state.deliveryAddress.deliveryAddresses
   );
 
-  console.log(deliveryAddresses);
-
   // Complete Order
   async function completeOrder(customerId: number, deliveryAddressId: number) {
     try {
@@ -85,7 +84,9 @@ const PurchaseElement = (props: Props) => {
   const handleButtonClick = () => {
     if (selectedDeliveryAddress && customerId) {
       completeOrder(customerId, selectedDeliveryAddress);
+      dispatch(refreshData());
     }
+
     navigate("/orders");
   };
 
