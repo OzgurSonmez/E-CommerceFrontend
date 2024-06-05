@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Homepage from "../components/Homepage/Homepage";
 import Products from "../pages/products/Products";
 import Orders from "../pages/orders/Orders";
 import Basket from "../pages/basket/Basket";
@@ -13,7 +12,7 @@ type Props = {};
 const RouteDefinitions = (props: Props) => {
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} />
+      <Route path="/" element={<Products />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/change-password" element={<ChangePassword />} />

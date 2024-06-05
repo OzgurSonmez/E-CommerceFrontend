@@ -212,7 +212,7 @@ const ProductFilter = (props: Props) => {
                 <button
                   onClick={() => {
                     dispatch(setOrderBy("favcount"));
-                    dispatch(setOrderDirection("descendingc"));
+                    dispatch(setOrderDirection("descending"));
                   }}
                 >
                   Favoriye göre azalan

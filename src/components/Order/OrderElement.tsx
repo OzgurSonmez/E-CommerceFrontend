@@ -33,7 +33,9 @@ const OrderElement = (props: Props) => {
 
   useEffect(() => {
     if (customerId) {
-      fetchCustomerOrdersData(customerId);
+      fetchCustomerOrdersData(customerId).then(() =>
+        fetchCustomerOrdersData(customerId)
+      );
     }
   }, [customerId, refreshData]);
 
